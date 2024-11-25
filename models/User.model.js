@@ -6,7 +6,7 @@ const EMAIL_PATTERN =
 
 const ROUNDS = 10
 
-const REQUIRED_FIELD = 'Required field'
+const REQUIRED_FIELD = 'Campo requerido'
 
 const userSchema = new mongoose.Schema(
   {
@@ -14,14 +14,14 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, REQUIRED_FIELD],
       unique: true,
-      match: [EMAIL_PATTERN, 'Email is invalid'],
+      match: [EMAIL_PATTERN, 'Email incorrecto'],
       trim: true,
       lowercase: true,
     },
     password: {
       type: String,
-      required: true,
-      minLength: [8, "Password must be 8 characters or longer"],
+      required: [true, REQUIRED_FIELD],
+      minLength: [8, "La contraseña debe tener 8 o más caracteres"],
     },
     username: {
       type: String,
@@ -38,11 +38,12 @@ const userSchema = new mongoose.Schema(
   }
 )
 
-const User = mongoose.model('User', userSchema);
 
 // Evento que se produce antes de guardar un usuario en la BBDD
+// IMPORTANTE: Tiene que ir antes del mongoose.model() sino, no lo utiliza
 userSchema.pre("save", function (next) {
   const user = this;
+  console.log('HASSSSSSH')
 
   // Antes de guardar, compruebo si tengo que hashear la contraseña, si su campo ha sido modificado o es nuevo
   if (user.isModified("password")) {
@@ -58,5 +59,7 @@ userSchema.pre("save", function (next) {
 userSchema.methods.checkPassword = function (password) {
   return bcrypt.compare(password, this.password);
 };
+
+const User = mongoose.model('User', userSchema);
 
 module.exports = User
