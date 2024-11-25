@@ -6,7 +6,17 @@ module.exports.create = (req, res, next) => {
 }
 
 module.exports.doCreate = (req, res, next) => {
-  User.create(req.body)
+  // Mi modelo requiere los campos que vienen el req.body, pero image lo ha procesado multer
+  // Necesito mandar en el create los campos de req.body y el campo image con la url que subi a cloudinary que esta en req.file.path
+  const fields = {
+    ...req.body,
+    image: req.file.path
+  }
+
+  // O añadir el key value image a req.body del tiron
+  // req.body.image = req.file.path
+
+  User.create(fields)
     .then(() => {
       res.redirect('/')
     })

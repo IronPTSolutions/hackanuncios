@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt');
 const EMAIL_PATTERN =
   /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
 
+const URL_PATTERN = /^(https?:\/\/)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,}(:\d+)?(\/[^\s]*)?$/
+
 const ROUNDS = 10
 
 const REQUIRED_FIELD = 'Campo requerido'
@@ -32,6 +34,11 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, REQUIRED_FIELD]
     },
+    image: {
+      type: String,
+      required: [true, REQUIRED_FIELD],
+      match: [URL_PATTERN, 'La imagen debe ser una URL válida']
+    }
   },
   {
     timestamps: true

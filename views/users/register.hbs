@@ -1,6 +1,7 @@
 <h1>Crear cuenta</h1>
 
-<form action="/register" method="post">
+{{!-- Importante el enctype si mandais fotos --}}
+<form action="/register" method="post" enctype="multipart/form-data">
   <div class="mb-3">
     <label for="email" class="form-label">Correo eléctronico</label>
     <input type="email" class="form-control {{#if errors.email}}is-invalid{{/if}}" id="email" name="email" value="{{values.email}}" required>
@@ -30,6 +31,14 @@
     <input type="tel" class="form-control {{#if errors.phone}}is-invalid{{/if}}" id="phone" name="phone"  value="{{values.phone}}" required>
     <div class="invalid-feedback">
       {{errors.phone}}
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="image" class="form-label">Imagen de perfil</label>
+    <input class="form-control {{#if errors.image}}is-invalid{{/if}}" type="file" id="image" name="image">
+    <div class="invalid-feedback">
+      {{errors.image}}
     </div>
   </div>
 
