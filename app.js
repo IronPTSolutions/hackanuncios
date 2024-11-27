@@ -7,6 +7,7 @@ require('./config/hbs.config')
 const express = require('express')
 const logger = require('morgan')
 const path = require('path')
+const { sessionConfig, getCurrentUser } = require('./config/session.config')
 
 const app = express()
 
@@ -22,6 +23,9 @@ app.set("view engine", "hbs");
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use(logger('dev'))
+
+app.use(sessionConfig);
+app.use(getCurrentUser);
 
 const routes = require('./routes/routes')
 app.use('/', routes)
