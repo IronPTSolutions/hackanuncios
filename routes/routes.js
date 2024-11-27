@@ -20,6 +20,8 @@ router.post('/register', upload.single('image'), usersController.doCreate)
 router.get('/login', authController.login)
 router.post('/login', authController.doLogin)
 
+router.get('/logout', authController.logout)
+
 // Products
 
 module.exports = router
