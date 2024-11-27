@@ -1,5 +1,5 @@
-const { default: mongoose } = require('mongoose')
-const moongose = require('mongoose')
+const mongoose = require('mongoose')
+const CATEGORIES = require('../data/categories')
 
 const REQUIRED_FIELD = 'Campo requerido'
 
@@ -25,6 +25,10 @@ const productSchema = new mongoose.Schema(
     images: {
       type: [String],
       required: [true, REQUIRED_FIELD],
+    },
+    categories: {
+      type: [String],
+      enum: [CATEGORIES],
     }
   },
   {
