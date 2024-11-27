@@ -3,5 +3,6 @@ module.exports = [
   'Motor',
   'Hogar',
   'Inmobiliaria',
-  'Formación'
-]
+  'Formación',
+  'Imagen y sonido',
+];

@@ -31,6 +31,7 @@ router.get('/profile', isAuthenticated, usersController.getUserProfile)
 
 // Products
 router.get('/products/new', isAuthenticated, productsController.create) // Importante: tiene que ir antes de la de detail, porque es mas especifica, sino entraria en la de detail antes
+router.post('/products/new', isAuthenticated, upload.array('images', 5), productsController.doCreate);
 
 router.get('/products', isAuthenticated, productsController.list)
 router.get('/products/:id', isAuthenticated, productsController.getDetail)
