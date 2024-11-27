@@ -31,7 +31,7 @@ module.exports.getCurrentUser = (req, res, next) => {
 
   User.findById(userId)
     .then(user => {
-      req.currentUserId = user
+      req.currentUser = user
       res.locals.currentUser = user
       next()
     })
