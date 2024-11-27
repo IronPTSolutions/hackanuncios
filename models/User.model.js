@@ -50,7 +50,6 @@ const userSchema = new mongoose.Schema(
 // IMPORTANTE: Tiene que ir antes del mongoose.model() sino, no lo utiliza
 userSchema.pre("save", function (next) {
   const user = this;
-  console.log('HASSSSSSH')
 
   // Antes de guardar, compruebo si tengo que hashear la contraseña, si su campo ha sido modificado o es nuevo
   if (user.isModified("password")) {
