@@ -48,3 +48,7 @@ module.exports.doCreate = (req, res, next) => {
 
     })
 }
+
+module.exports.getUserProfile = (req, res, next) => {
+  res.render('users/userProfile')
+}

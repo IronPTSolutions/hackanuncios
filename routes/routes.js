@@ -22,6 +22,9 @@ router.post('/login', authController.doLogin)
 
 router.get('/logout', authController.logout)
 
+// Users
+router.get('/profile', usersController.getUserProfile)
+
 // Products
 
 module.exports = router
