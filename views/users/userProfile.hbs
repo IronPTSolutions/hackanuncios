@@ -1,11 +1,45 @@
-<h1>Mi perfil</h1>
+{{#if profile}}
+  <h1>Mi perfil</h1>
+{{/if}}
+
 
 <div>
   <div class="text-center">
-    <img class="rounded-circle" src="{{currentUser.image}}" alt="User" height="60">
-    <h2>{{currentUser.username}}</h2>
-    <h3>{{currentUser.email}}</h3>
+    <div class="my-4 bg-secondary-subtle p-4 rounded">
+      <img class="rounded-circle" src="{{user.image}}" alt="User" height="60">
+      <h3>{{user.username}}</h3>
+      <h4>{{user.email}}</h4>
+      {{#if profile}}
+        <a href="/products/new" class="btn btn-primary">Crea un nuevo anuncio</a>
+      {{/if}}
+    </div>
 
-    <a href="/products/new" class="btn btn-primary">Crea un nuevo anuncio</a>
+
+    {{#if profile}}
+      <h2>Mis anuncios</h2>
+    {{else}}
+      <h2>Anuncios de este usuario</h2>
+    {{/if}}
+
+    <div class="row">
+      {{#each user.products as |product|}}
+        <div class="col-12 col-md-4">
+          <div class="card" style="width: 18rem;">
+            <img src="{{product.images.[0]}}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{product.title}}</h5>
+              <p class="card-text">{{product.price}} €</p>
+              <div class="d-flex gap-2">
+                <a href="/products/{{product.id}}" class="btn btn-primary">See more</a>
+                {{#if ../profile}}
+                  <a href="/products/{{product.id}}/edit" class="btn btn-outline-primary">Edit</a>
+                  <a href="/products/{{product.id}}/delete" class="btn btn-danger">Delete</a>
+                {{/if}} 
+              </div>
+            </div>
+          </div>
+                  </div>
+      {{/each}}
+    </div>
   </div>
 </div>

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const User = require('../models/User.model')
+const Product = require('../models/Product.model')
 
 module.exports.create = (req, res, next) => {
   res.render('users/register')
@@ -49,6 +50,20 @@ module.exports.doCreate = (req, res, next) => {
     })
 }
 
+module.exports.getCurrentUserProfile = (req, res, next) => {
+  Product.find({ owner: req.currentUser.id })
+    .then((products) => {
+      req.currentUser.products = products
+      res.render('users/userProfile', { user: req.currentUser, profile: true })
+    })
+    .catch(err => next(err))
+}
+
 module.exports.getUserProfile = (req, res, next) => {
-  res.render('users/userProfile')
+  User.findById(req.params.id)
+    .populate('products')
+    .then(user => {
+      res.render('users/userProfile', { user })
+    })
+    .catch(err => next(err))
 }

@@ -38,12 +38,22 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: [true, REQUIRED_FIELD],
       match: [URL_PATTERN, 'La imagen debe ser una URL válida']
-    }
+    },
   },
   {
     timestamps: true
   }
 )
+
+// Creo un campo virtual para relacionar usuario con modelos y tener su array
+
+//Equivalente a Product.find({ owner: user.id })
+userSchema.virtual('products', {
+  foreignField: 'owner',
+  localField: '_id',
+  justOne: false,
+  ref: 'Product'
+})
 
 
 // Evento que se produce antes de guardar un usuario en la BBDD
