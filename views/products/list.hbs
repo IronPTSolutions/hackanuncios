@@ -1,8 +1,20 @@
 <h1>Nuestros anuncios</h1>
 
-<div class="d-flex gap-2">
-  
+<div class="d-flex gap-5">
+  {{#each categories as |category|}}
+    <a class="text-center text-decoration-none" href="/products?category={{category.value}}">
+        <img src="{{category.img}}" height="40">
+        <p class="">{{category.label}}</p>
+    </a>
+  {{/each}}
 </div>
+
+{{!-- Como hacerlo con form --}}
+{{!-- <form action="/products" method="get">
+  <button name="category" value="tecnologia">
+    Tecnologia
+  </button>
+</form> --}}
 
 <div class="row">
   {{#each products as |product|}}

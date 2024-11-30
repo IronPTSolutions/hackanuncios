@@ -22,7 +22,7 @@
       <label for="price" class="form-label">Categorias</label>
       <select class="form-select" multiple name="categories" aria-label="Multiple select example">
         {{#each categories as |category|}}
-          <option value="{{category}}">{{category}}</option>
+          <option value="{{category.value}}">{{category.label}}</option>
         {{/each}}
       </select>
       <div class="invalid-feedback">

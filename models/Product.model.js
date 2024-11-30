@@ -28,7 +28,7 @@ const productSchema = new mongoose.Schema(
     },
     categories: {
       type: [String],
-      enum: CATEGORIES,
+      enum: CATEGORIES.map(category => category.value),
       required: [true, REQUIRED_FIELD],
     }
   },
