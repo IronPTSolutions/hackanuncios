@@ -1,1 +1,13 @@
 <h1>Nuestros anuncios</h1>
+
+<div class="d-flex gap-2">
+  
+</div>
+
+<div class="row">
+  {{#each products as |product|}}
+    <div class="col-12 col-md-4">
+      {{> productCard product=product}}
+    </div>
+  {{/each}}
+</div>

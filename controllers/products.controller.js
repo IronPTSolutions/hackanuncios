@@ -3,7 +3,11 @@ const CATEGORIES = require('../data/categories')
 const mongoose = require('mongoose')
 
 module.exports.list = (req, res, next) => {
-  res.render('products/list')
+  Product.find()
+    .then(products => {
+      res.render('products/list', { products, categories })
+    })
+    .catch(err => next(err))
 }
 
 module.exports.getDetail = (req, res, next) => {
