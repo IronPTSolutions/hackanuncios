@@ -1,6 +1,6 @@
 <div class="row">
-  <div class="col-12 col-md-9">
-    <div class="bg-light">
+  <div class="col-12 col-md-7">
+    <div class="bg-light rounded overflow-hidden">
       <img id="current-image" class="img-fluid" src="{{product.images.[0]}}" />
     </div>
 
@@ -11,9 +11,21 @@
     </div>
 
     <h1>{{product.title}}</h1>
+    <p>{{product.price}}€</p>
+
+    <p>{{product.description}}</p>
 
   </div>
-  <div class="col-12 col-md-3"></div>
+  <div class="col-12 col-md-5">
+    <div class="bg-secondary-subtle w-100 p-4 rounded">
+      <p>Anuncio de:</p>
+      <div class="d-flex gap-2 my-2">
+        <img class="rounded-circle" src="{{product.owner.image}}" height="30" />
+        <p class="fw-bold">{{product.owner.username}}</p>
+      </div>
+      <button class="btn btn-primary w-100">Comprar</button>
+    </div>
+  </div>
 </div>
 
 <script src="/js/product-detail.js"></script>
