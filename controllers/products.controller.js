@@ -30,7 +30,7 @@ module.exports.getDetail = (req, res, next) => {
         return next({ status: 404, message: 'Product not found' })
       }
 
-      res.render('products/detail', { product, isWished: req.currentUser.wishes.some(wish => wish.product.toString() === product.id.toString()) })
+      res.render('products/detail', { product, isWished: req.currentUser.wishes.some(wish => wish.product.id.toString() === product.id.toString()) })
     })
     .catch(error => next(error))
 }

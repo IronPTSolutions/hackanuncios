@@ -3,6 +3,7 @@ const Wish = require('../models/Wish.model');
 module.exports.handle = (req, res, next) => {
   const { productId } = req.params
   const { id: userId } = req.currentUser
+
   // Ver si existe un wish para ese producto y ese usuario
   Wish.findOne({ product: productId, user: userId })
     .then(wish => {
