@@ -31,3 +31,16 @@
     </div>
   {{/each}}
 </div>
+
+{{#if page}}
+  <div class="d-flex justify-content-between mt-4">
+    <a href="/products?page={{prevPage}}" class="btn btn-outline-primary">
+      Ver resultados anteriores
+    </a>
+{{else}}
+  <div class="d-flex justify-content-end mt-4">
+{{/if}}
+  <a href="/products?page={{nextPage}}" class="btn btn-outline-primary">
+    Ver más resultados
+  </a>
+</div>

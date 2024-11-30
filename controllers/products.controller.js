@@ -3,7 +3,11 @@ const CATEGORIES = require('../data/categories')
 const mongoose = require('mongoose')
 
 module.exports.list = (req, res, next) => {
-  const { category } = req.query
+  const { category, page } = req.query
+
+  const PER_PAGE = 9
+  const PAGE = Number(page) || 0
+  const SKIP = PER_PAGE * PAGE
 
   const query = {}
 
@@ -11,9 +15,23 @@ module.exports.list = (req, res, next) => {
     query.categories = { $in: category }
   }
 
-  Product.find(query)
+  // Para contar el número de resultados
+  // Product.countDocuments({})
+
+  Product.find(query).limit(PER_PAGE).skip(SKIP)
     .then(products => {
-      res.render('products/list', { products, categories: CATEGORIES, category })
+      const data = {
+        products,
+        categories: CATEGORIES,
+        category,
+        page: page,
+        nextPage: PAGE + 1,
+      }
+    
+      if (PAGE - 1 > 0) {
+        data.prevPage = PAGE - 1
+      }
+      res.render('products/list', data)
     })
     .catch(err => next(err))
 }
