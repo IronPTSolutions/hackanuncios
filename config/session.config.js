@@ -30,6 +30,8 @@ module.exports.getCurrentUser = (req, res, next) => {
   }
 
   User.findById(userId)
+    .populate('wishes')
+    .populate({ path: 'wishes', populate: 'product' })
     .then(user => {
       req.currentUser = user
       res.locals.currentUser = user

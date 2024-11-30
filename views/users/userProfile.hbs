@@ -28,5 +28,17 @@
         </div>
       {{/each}}
     </div>
+
+    {{#if profile}}
+      <h2>Mi lista de deseos</h2>
+
+      <div class="row">
+        {{#each user.wishes as |wish|}}
+          <div class="col-12 col-md-4">
+            {{> productCard product=wish.product }}
+          </div>
+        {{/each}}
+      </div>
+    {{/if}}
   </div>
 </div>

@@ -8,6 +8,7 @@ const miscController = require('../controllers/misc.controller')
 const usersController = require('../controllers/users.controller')
 const authController = require('../controllers/auth.controller')
 const productsController = require('../controllers/products.controller')
+const wishesController = require('../controllers/wishes.controller')
 
 // Middlewares
 const { isAuthenticated, isNotAuthenticated } = require('../middlewares/auth.middleware')
@@ -37,6 +38,10 @@ router.post('/products/new', isAuthenticated, upload.array('images', 5), product
 router.get('/products', isAuthenticated, productsController.list)
 router.get('/products/:id', isAuthenticated, productsController.getDetail)
 router.get('/products/:id/delete', isAuthenticated, productsController.delete)
+
+// Wishes
+
+router.post('/products/:productId/wish', isAuthenticated, wishesController.handle)
 
 
 module.exports = router

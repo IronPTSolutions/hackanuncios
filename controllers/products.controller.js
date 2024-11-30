@@ -21,6 +21,8 @@ module.exports.list = (req, res, next) => {
 module.exports.getDetail = (req, res, next) => {
   const { id } = req.params
 
+  console.log(req.currentUser.wishes)
+
   Product.findById(id)
     .populate('owner')
     .then(product => {
@@ -28,7 +30,7 @@ module.exports.getDetail = (req, res, next) => {
         return next({ status: 404, message: 'Product not found' })
       }
 
-      res.render('products/detail', { product })
+      res.render('products/detail', { product, isWished: req.currentUser.wishes.some(wish => wish.product.toString() === product.id.toString()) })
     })
     .catch(error => next(error))
 }
