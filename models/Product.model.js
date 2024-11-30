@@ -29,6 +29,7 @@ const productSchema = new mongoose.Schema(
     categories: {
       type: [String],
       enum: CATEGORIES,
+      required: [true, REQUIRED_FIELD],
     }
   },
   {

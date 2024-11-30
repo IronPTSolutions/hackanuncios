@@ -9,7 +9,15 @@ module.exports.list = (req, res, next) => {
 module.exports.getDetail = (req, res, next) => {
   const { id } = req.params
 
-  res.render('products/detail')
+  Product.findById(id)
+    .then(product => {
+      if (!product) {
+        return next({ status: 404, message: 'Product not found' })
+      }
+
+      res.render('products/detail', { product })
+    })
+    .catch(error => next(error))
 }
 
 module.exports.create = (req, res, next) => {
@@ -17,8 +25,10 @@ module.exports.create = (req, res, next) => {
 }
 
 module.exports.doCreate = (req, res, next) => {
-  console.log(req.body)
   req.body.owner = req.currentUser.id
+  if (req.files) {
+    req.body.images = req.files.map(file => file.path)
+  }
 
   Product.create(req.body)
     .then((productCreated) => {

@@ -41,6 +41,10 @@ app.use((err, req, res, next) => {
   // always logs the error
   console.error("ERROR", req.method, req.path, err);
 
+  if (err.status === 404) {
+    return res.status(404).render('not-found')
+  }
+
   // only render if the error ocurred before sending the response
   if (!res.headersSent) {
     res.status(500).render("error");
