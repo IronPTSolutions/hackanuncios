@@ -55,6 +55,13 @@ userSchema.virtual('products', {
   ref: 'Product'
 })
 
+userSchema.virtual('wishes', {
+  foreignField: 'user',
+  localField: '_id',
+  justOne: false,
+  ref: 'Wish'
+})
+
 
 // Evento que se produce antes de guardar un usuario en la BBDD
 // IMPORTANTE: Tiene que ir antes del mongoose.model() sino, no lo utiliza

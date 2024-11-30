@@ -29,7 +29,14 @@
         <img class="rounded-circle" src="{{product.owner.image}}" height="30" />
         <p class="fw-bold">{{product.owner.username}}</p>
       </a>
-      <button class="btn btn-primary w-100">Comprar</button>
+      <button class="btn btn-primary w-100 mb-2">Comprar</button>
+      <form action="/products/{{product.id}}/wish" method="post">
+        {{#if isWished}}
+          <button class="btn btn-success w-100">Eliminar de la lista de deseos</button>
+        {{else}}
+          <button class="btn btn-primary w-100">Añadir a la lista de deseos</button>
+        {{/if}}
+      </form>
     </div>
   </div>
 </div>
