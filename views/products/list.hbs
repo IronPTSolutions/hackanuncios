@@ -16,10 +16,18 @@
   </button>
 </form> --}}
 
+{{#if category}}
+<h5>Estás viendo resultados de anuncios de <span class="fw-bold">{{getCategoryLabel category}}</span></h5>
+{{/if}}
+
 <div class="row">
   {{#each products as |product|}}
     <div class="col-12 col-md-4">
       {{> productCard product=product}}
+    </div>
+  {{else}}
+    <div class="col-12">
+      <p>No hay anuncios disponibles para tu búsqueda</p>
     </div>
   {{/each}}
 </div>

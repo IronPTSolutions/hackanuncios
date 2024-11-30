@@ -13,7 +13,7 @@ module.exports.list = (req, res, next) => {
 
   Product.find(query)
     .then(products => {
-      res.render('products/list', { products, categories: CATEGORIES })
+      res.render('products/list', { products, categories: CATEGORIES, category })
     })
     .catch(err => next(err))
 }
